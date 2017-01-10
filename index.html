@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>中興大學美食地圖</title>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #blank {
+                height: 50%;
+                width: 100%;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+        <div id="blank"></div>
+
+        <ul class="collection with-header">
+            <li class="collection-header">
+                 <h4>中興大學美食地圖</h4>
+            </li>
+            <div class="collection">
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.124552, 120.674760);' class="collection-item active">京都排骨(興大店)</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.125610, 120.675538);' class="collection-item">興大牛排</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.124729, 120.673510);' class="collection-item">香草藍舍</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.125319, 120.675231);' class="collection-item">第一名爌肉飯</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.125233, 120.675306);' class="collection-item">餃佼者</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.126215, 120.673648);' class="collection-item">小慢慢 2號店</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.125741, 120.674239);' class="collection-item">韓村正統韓式料理</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.121902, 120.679519);' class="collection-item">披薩工廠興大店</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.129343, 120.674875);' class="collection-item">遇見PASTA．和食</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.122429, 120.672223);' class="collection-item">歐巴斯。 綠光LeRayonVert</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.124560, 120.674467);' class="collection-item">九食圓異國石鍋料理館</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.123330, 120.676997);' class="collection-item">盛宴</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.126086, 120.675213);' class="collection-item">清一色牛肉麵(興大店)</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.126167, 120.675027);' class="collection-item">聞香牛肉麵</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.122265, 120.683600);' class="collection-item">土司森林 南門店</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.115641, 120.671098);' class="collection-item">新野西軍</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.125802, 120.673517);' class="collection-item">小潛艇創意料理</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.127556, 120.676769);' class="collection-item">五年酒班</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.125137, 120.675304);' class="collection-item">夏茶爾活力餐飲</a>
+                 <a href='#' onclick='deleteMarkers();placeMarkerAndPanTo(24.122296, 120.681562);' class="collection-item">槿日式食堂</a>
+            </div>
+        </ul>
+
+        <script>
+            var map;
+            var markers = [];
+
+            function initMap() {
+                var HSNU = {
+                    lat: 24.123552,
+                    lng: 120.6731373
+                };
+
+                map = new google.maps.Map(document.getElementById('blank'), {
+                        zoom: 16,
+                        center: HSNU,
+                    });
+
+                var infowindow = new google.maps.InfoWindow({
+                        content: 'TEST'
+                    });
+
+                marker.addListener('click', function() {
+                    infowindow.open(map, markers);
+                });
+            }
+
+            function setMapOnAll(map) {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(map);
+                }
+            }
+
+            function clearMarkers() {
+                setMapOnAll(null);
+            }
+
+            function showMarkers() {
+                setMapOnAll(map);
+            }
+
+            function deleteMarkers() {
+                clearMarkers();
+                markers = [];
+            }
+
+            function placeMarkerAndPanTo(LAT, LNG) {
+                var marker = new google.maps.Marker({
+                        position: {
+                            lat: LAT,
+                            lng: LNG
+                        },
+                        map: map,
+                        animation: google.maps.Animation.DROP,
+                        animation: google.maps.Animation.BOUNCE,
+                        draggable: true,
+                    });
+                map.panTo({
+                        lat: LAT,
+                        lng: LNG
+                    });
+                markers.push(marker);
+            }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYb59PuxG7r8lWOJTKa6CRu2NOl7rFn1U&signed_in=true&callback=initMap"></script>
+    </body>
+
+</html>
